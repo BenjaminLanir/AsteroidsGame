@@ -1,15 +1,86 @@
+SpaceShip theShip;
+Star [] stars;
 //your variable declarations here
 public void setup() 
 {
   //your code here
+  theShip = new SpaceShip();
+  size(1024, 900);
+  stars = new Star[(int) (Math.random() * 200)];
+  for (int i = 0; i < stars.length; i++)
+  {
+    stars[i] = new Star();
+  }
 }
 public void draw() 
 {
   //your code here
+  background(255);
+  theShip.show();
+  theShip.move();
+  for (int j = 0; j < stars.length; j++)
+  {
+    stars[j].show();
+  }
 }
-class SpaceShip //extends Floater  
+class Star
+{
+  int myX, myY;
+  int numStars[];
+  int 
+  Star()
+  {
+    myX = (int) Math.random() * 1024;
+    myY = (int) Math.random() * 900;
+  }
+  void show()
+  {
+    fill(0);
+    ellipse(100, myY, 10, 10);
+  }
+}
+class SpaceShip extends Floater  
 {   
     //your code here
+    public void setX(int x)
+    {
+      myCenterX = x;
+    }
+    public int getX(){return (int) myCenterX;}
+    public void setY(int y)
+    {
+      myCenterY = y;
+    }
+    public int getY(){return (int) myCenterY;}
+    public void setDirectionX(double x)
+    {
+      myDirectionX = x;
+    }
+    public double getDirectionX(){return myDirectionX;}
+    public void setDirectionY(double y)
+    {
+      myDirectionY = y;
+    }
+    public double getDirectionY(){return myDirectionY;}
+    public void setPointDirection(int degrees)
+    {
+      myPointDirection = degrees;
+    }
+    public double getPointDirection(){return myPointDirection;}
+    SpaceShip()
+    {
+      corners = 4;
+      xCorners = new int[4];
+      yCorners = new int[4];
+      xCorners[0] = -8;
+      yCorners[0] = -8;
+      xCorners[1] = -2;
+      yCorners[1] = 0;
+      xCorners[2] = -8;
+      yCorners[2] = 8;
+      xCorners[3] = 16;
+      yCorners[3] = 0;
+    }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -87,4 +158,25 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-
+public void keyPressed()
+{
+  if (key == 'w')
+  {
+    theShip.accelerate(1);
+  }
+  if (key == 's')
+  {
+    theShip.accelerate(-1);
+  }
+  if (key == 'd')
+  {
+    theShip.rotate(5);
+  }
+  if (key == 'a')
+  {
+    theShip.rotate(-5);
+  }
+  if (key == 'j')
+  {
+  }
+}
