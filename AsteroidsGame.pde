@@ -7,12 +7,13 @@ public void setup()
   //your code here
   theShip = new SpaceShip();
   size(1024, 900);
-  stars = new Star[(int) (Math.random() * 200)];
-  theAsteroids = new Asteroid[10];
+  stars = new Star[(int) (Math.random() * 150 + 50)];
+  theAsteroids = new Asteroid[100];
   for (int q = 0; q < theAsteroids.length; q++)
   {
     theAsteroids[q] = new Asteroid();
     theAsteroids[q].setPointDirection((int) (Math.random() * 360));
+    theAsteroids[q].accelerate(Math.random() * 10 - 5);
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -37,10 +38,10 @@ public void draw()
 }
 class Star
 {
-  int myX, myY; //numStars;
+  private int myX, myY; //numStars;
   //int [] starX;
   //int [] starY;
-  Star()
+  public Star()
   {
     myX = (int) (Math.random() * 1024);
     myY = (int) (Math.random() * 900);
@@ -53,7 +54,7 @@ class Star
       starY[w] = (int) (Math.random() * 900);
     }*/
   }
-  void show()
+  public void show()
   {
     fill(255, 255, 0);
     ellipse(myX, myY, 10, 10);
@@ -86,7 +87,7 @@ class SpaceShip extends Floater
     myPointDirection = degrees;
   }
   public double getPointDirection(){return myPointDirection;}
-    SpaceShip()
+  public SpaceShip()
     {
       corners = 4;
       xCorners = new int[corners];
@@ -106,7 +107,8 @@ class SpaceShip extends Floater
 }
 class Asteroid extends Floater
 {
-     public void setX(int x)
+    private int mySpinSpeed;
+    public void setX(int x)
     {
       myCenterX = x;
     }
@@ -131,29 +133,35 @@ class Asteroid extends Floater
       myPointDirection = degrees;
     }
     public double getPointDirection(){return myPointDirection;}
-  Asteroid()
+  public Asteroid()
   {
     corners = 5;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    myColor = (222);
+    myColor = (122);
     myCenterX = (Math.random() * 1024);
     myCenterY = (Math.random() * 900);
+    mySpinSpeed = (int) (Math.random() * 50 - 25);
     /*for (int w = 0; w < corners; w++)
     {
       xCorners[w] = 
       yCorners[w] = (int) (Math.random() * 100 - 50);
     }*/
-    xCorners[0] = -9;
-    xCorners[1] = -3;
-    xCorners[2] = 6;
-    xCorners[3] = 9;
-    xCorners[4] = 6;
-    yCorners[0] = -3;
-    yCorners[1] = 6;
-    yCorners[2] = 9;
-    yCorners[3] = 3;
-    yCorners[4] = -9;
+    xCorners[0] = -27;
+    xCorners[1] = -9;
+    xCorners[2] = 18;
+    xCorners[3] = 27;
+    xCorners[4] = 18;
+    yCorners[0] = -9;
+    yCorners[1] = 18;
+    yCorners[2] = 27;
+    yCorners[3] = 9;
+    yCorners[4] = -27;
+  }
+  public void move()
+  {
+    rotate(mySpinSpeed);
+    super.move();
   }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
