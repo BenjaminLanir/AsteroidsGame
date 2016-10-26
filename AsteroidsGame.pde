@@ -1,19 +1,33 @@
 SpaceShip theShip;
 Star [] stars;
-Asteroid [] theAsteroids;
+//Asteroid [] theAsteroids;
+ArrayList <Asteroid> theAsteroids;
 //your variable declarations here
 public void setup() 
 {
   //your code here
+  camera(100, 100, 0, 100, 100, 0, -1, 1, 1);
   theShip = new SpaceShip();
   size(1024, 900);
   stars = new Star[(int) (Math.random() * 150 + 50)];
-  theAsteroids = new Asteroid[100];
-  for (int q = 0; q < theAsteroids.length; q++)
+  //theAsteroids = new Asteroid[10];
+  theAsteroids = new ArrayList <Asteroid>();
+  //Asteroids someAsteroid = new Asteroid();
+  //theAsteroids.add(someAsteroid);
+  //theAsteroids.add(new Asteroid());
+  //theAsteroids.remove(1);
+  /*for (int q = 0; q < theAsteroids.length; q++)
   {
     theAsteroids[q] = new Asteroid();
     theAsteroids[q].setPointDirection((int) (Math.random() * 360));
     theAsteroids[q].accelerate(Math.random() * 10 - 5);
+  }*/
+  for (int q = 0; q < 10; q++)
+  {
+    theAsteroids.add(new Asteroid());
+    //theAsteroids(q).setPointDirection((int) (Math.random() * 360));
+    //theAsteroids(q).accelerate(Math.random() * 10 - 5);
+    theAsteroid set (q, Asteroid.setPointDirection((int) (Math.random() * 360)));
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -100,9 +114,17 @@ class SpaceShip extends Floater
       yCorners[2] = 8;
       xCorners[3] = 16;
       yCorners[3] = 0;
-      myColor = (255);
+      myColor = 255;
       myCenterX = 512;
       myCenterY = 450;
+    }
+    public void highperspace()
+    {
+      myCenterX = (int) (Math.random() * 1024);
+      myCenterY = (int) (Math.random() * 900);
+      myPointDirection = (int) (Math.random() * 360);
+      myDirectionX = 0;
+      myDirectionY = 0;
     }
 }
 class Asteroid extends Floater
@@ -260,5 +282,6 @@ public void keyPressed()
   }
   if (key == 'j')
   {
+    theShip.highperspace();
   }
 }
