@@ -1,12 +1,13 @@
 SpaceShip theShip;
 Star [] stars;
+Camera theCamera;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
 //your variable declarations here
 public void setup() 
 {
   //your code here
-  camera(100, 100, 0, 100, 100, 0, -1, 1, 1);
+  theCamera = new Camera();
   theShip = new SpaceShip();
   size(1024, 900);
   stars = new Star[(int) (Math.random() * 150 + 50)];
@@ -27,7 +28,7 @@ public void setup()
     theAsteroids.add(new Asteroid());
     //theAsteroids(q).setPointDirection((int) (Math.random() * 360));
     //theAsteroids(q).accelerate(Math.random() * 10 - 5);
-    theAsteroid set (q, Asteroid.setPointDirection((int) (Math.random() * 360)));
+    //theAsteroid set (q, Asteroid.setPointDirection((int) (Math.random() * 360)));
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -38,17 +39,21 @@ public void draw()
 {
   //your code here
   background(0);
+  fill(0);
+  rect(0, 0, 5000, 5000);
   theShip.show();
   theShip.move();
   for (int j = 0; j < stars.length; j++)
   {
     stars[j].show();
   }
-  for (int u = 0; u < theAsteroids.length; u++)
+  /*for (int u = 0; u < theAsteroids.length; u++)
   {
     theAsteroids[u].show();
     theAsteroids[u].move();
-  }
+  }*/
+  duringGame();
+  theCamera.move();
 }
 class Star
 {
@@ -284,4 +289,23 @@ public void keyPressed()
   {
     theShip.highperspace();
   }
+}
+class Camera
+{
+  PVector position;
+  Camera()
+  {
+    position = new PVector(0 , 0);
+  }
+  public void move()
+  {
+    position.x = position.x + (float) theShip.getDirectionX();
+    position.y = position.y + (float) theShip.getDirectionY();
+  }
+  public PVector getVector() {return position;}
+}
+public void duringGame()
+{
+  translate(-theCamera.position.x, -theCamera.position.y);
+  theCamera.move();
 }
