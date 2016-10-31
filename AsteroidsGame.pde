@@ -10,7 +10,7 @@ public void setup()
   theCamera = new Camera();
   theShip = new SpaceShip();
   size(1024, 900);
-  stars = new Star[(int) (Math.random() * 150 + 50)];
+  stars = new Star[(int) (Math.random() * 1500 + 500)];
   //theAsteroids = new Asteroid[10];
   theAsteroids = new ArrayList <Asteroid>();
   //Asteroids someAsteroid = new Asteroid();
@@ -25,10 +25,12 @@ public void setup()
   }*/
   for (int q = 0; q < 10; q++)
   {
-    theAsteroids.add(new Asteroid());
+    //theAsteroids.set(q, new Asteroid());
     //theAsteroids(q).setPointDirection((int) (Math.random() * 360));
     //theAsteroids(q).accelerate(Math.random() * 10 - 5);
     //theAsteroid set (q, Asteroid.setPointDirection((int) (Math.random() * 360)));
+    //theAsteroids.setPointDirection((int) (Math.random() * 360));
+
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -41,6 +43,7 @@ public void draw()
   background(0);
   fill(0);
   rect(0, 0, 5000, 5000);
+  duringGame();
   theShip.show();
   theShip.move();
   for (int j = 0; j < stars.length; j++)
@@ -52,8 +55,6 @@ public void draw()
     theAsteroids[u].show();
     theAsteroids[u].move();
   }*/
-  duringGame();
-  theCamera.move();
 }
 class Star
 {
@@ -62,8 +63,8 @@ class Star
   //int [] starY;
   public Star()
   {
-    myX = (int) (Math.random() * 1024);
-    myY = (int) (Math.random() * 900);
+    myX = (int) (Math.random() * 5000);
+    myY = (int) (Math.random() * 5000);
     /*numStars = (int) (Math.random() * 200);
     starX = new int[numStars];
     starY = new int[numStars];
@@ -77,118 +78,6 @@ class Star
   {
     fill(255, 255, 0);
     ellipse(myX, myY, 10, 10);
-  }
-}
-class SpaceShip extends Floater  
-{   
-  public void setX(int x)
-  {
-    myCenterX = x;
-  }
-  public int getX(){return (int) myCenterX;}
-  public void setY(int y)
-  {
-    myCenterY = y;
-  }
-  public int getY(){return (int) myCenterY;}
-  public void setDirectionX(double x)
-  {
-    myDirectionX = x;
-  }
-  public double getDirectionX(){return myDirectionX;}
-  public void setDirectionY(double y)
-  {
-    myDirectionY = y;
-  }
-  public double getDirectionY(){return myDirectionY;}
-  public void setPointDirection(int degrees)
-  {
-    myPointDirection = degrees;
-  }
-  public double getPointDirection(){return myPointDirection;}
-  public SpaceShip()
-    {
-      corners = 4;
-      xCorners = new int[corners];
-      yCorners = new int[corners];
-      xCorners[0] = -8;
-      yCorners[0] = -8;
-      xCorners[1] = -2;
-      yCorners[1] = 0;
-      xCorners[2] = -8;
-      yCorners[2] = 8;
-      xCorners[3] = 16;
-      yCorners[3] = 0;
-      myColor = 255;
-      myCenterX = 512;
-      myCenterY = 450;
-    }
-    public void highperspace()
-    {
-      myCenterX = (int) (Math.random() * 1024);
-      myCenterY = (int) (Math.random() * 900);
-      myPointDirection = (int) (Math.random() * 360);
-      myDirectionX = 0;
-      myDirectionY = 0;
-    }
-}
-class Asteroid extends Floater
-{
-    private int mySpinSpeed;
-    public void setX(int x)
-    {
-      myCenterX = x;
-    }
-    public int getX(){return (int) myCenterX;}
-    public void setY(int y)
-    {
-      myCenterY = y;
-    }
-    public int getY(){return (int) myCenterY;}
-    public void setDirectionX(double x)
-    {
-      myDirectionX = x;
-    }
-    public double getDirectionX(){return myDirectionX;}
-    public void setDirectionY(double y)
-    {
-      myDirectionY = y;
-    }
-    public double getDirectionY(){return myDirectionY;}
-    public void setPointDirection(int degrees)
-    {
-      myPointDirection = degrees;
-    }
-    public double getPointDirection(){return myPointDirection;}
-  public Asteroid()
-  {
-    corners = 5;
-    xCorners = new int[corners];
-    yCorners = new int[corners];
-    myColor = (122);
-    myCenterX = (Math.random() * 1024);
-    myCenterY = (Math.random() * 900);
-    mySpinSpeed = (int) (Math.random() * 50 - 25);
-    /*for (int w = 0; w < corners; w++)
-    {
-      xCorners[w] = 
-      yCorners[w] = (int) (Math.random() * 100 - 50);
-    }*/
-    xCorners[0] = -27;
-    xCorners[1] = -9;
-    xCorners[2] = 18;
-    xCorners[3] = 27;
-    xCorners[4] = 18;
-    yCorners[0] = -9;
-    yCorners[1] = 18;
-    yCorners[2] = 27;
-    yCorners[3] = 9;
-    yCorners[4] = -27;
-  }
-  public void move()
-  {
-    rotate(mySpinSpeed);
-    super.move();
   }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
@@ -289,20 +178,6 @@ public void keyPressed()
   {
     theShip.highperspace();
   }
-}
-class Camera
-{
-  PVector position;
-  Camera()
-  {
-    position = new PVector(0 , 0);
-  }
-  public void move()
-  {
-    position.x = position.x + (float) theShip.getDirectionX();
-    position.y = position.y + (float) theShip.getDirectionY();
-  }
-  public PVector getVector() {return position;}
 }
 public void duringGame()
 {
