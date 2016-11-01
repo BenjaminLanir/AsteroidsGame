@@ -50,4 +50,9 @@ class SpaceShip extends Floater
       myDirectionX = 0;
       myDirectionY = 0;
     }
+    public void move()
+    {
+      myCenterX += myDirectionX;    
+      myCenterY += myDirectionY; 
+    }
 }

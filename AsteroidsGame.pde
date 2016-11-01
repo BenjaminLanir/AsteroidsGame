@@ -10,7 +10,7 @@ public void setup()
   theCamera = new Camera();
   theShip = new SpaceShip();
   size(1024, 900);
-  stars = new Star[(int) (Math.random() * 1500 + 500)];
+  stars = new Star[(int) (Math.random() * 3000 + 500)];
   //theAsteroids = new Asteroid[10];
   theAsteroids = new ArrayList <Asteroid>();
   //Asteroids someAsteroid = new Asteroid();
@@ -25,12 +25,14 @@ public void setup()
   }*/
   for (int q = 0; q < 10; q++)
   {
+    theAsteroids.add(new Asteroid());
+    //theAsteroids.set(Asteroid.setPointDirection(q));
+    System.out.println(theAsteroids.getPointDirection());
     //theAsteroids.set(q, new Asteroid());
     //theAsteroids(q).setPointDirection((int) (Math.random() * 360));
     //theAsteroids(q).accelerate(Math.random() * 10 - 5);
     //theAsteroid set (q, Asteroid.setPointDirection((int) (Math.random() * 360)));
     //theAsteroids.setPointDirection((int) (Math.random() * 360));
-
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -40,7 +42,7 @@ public void setup()
 public void draw() 
 {
   //your code here
-  background(0);
+  background(255, 0, 0);
   fill(0);
   rect(0, 0, 5000, 5000);
   duringGame();
