@@ -26,8 +26,8 @@ public void setup()
   for (int q = 0; q < 10; q++)
   {
     theAsteroids.add(new Asteroid());
-    //theAsteroids.set(Asteroid.setPointDirection(q));
-    System.out.println(theAsteroids.getPointDirection());
+    theAsteroids.get(q).setPointDirection(20);
+    System.out.println(theAsteroids.get(q).getPointDirection());
     //theAsteroids.set(q, new Asteroid());
     //theAsteroids(q).setPointDirection((int) (Math.random() * 360));
     //theAsteroids(q).accelerate(Math.random() * 10 - 5);
