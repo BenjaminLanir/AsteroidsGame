@@ -1,5 +1,6 @@
 class SpaceShip extends Floater  
 {   
+  private double health;
   public void setX(int x)
   {
     myCenterX = x;
@@ -25,6 +26,11 @@ class SpaceShip extends Floater
     myPointDirection = degrees;
   }
   public double getPointDirection(){return myPointDirection;}
+  public void setHealth(double w)
+  {
+    health = w;
+  }
+  public double getHealth(){return health;}
   public SpaceShip()
     {
       corners = 4;
@@ -41,6 +47,7 @@ class SpaceShip extends Floater
       myColor = 255;
       myCenterX = 512;
       myCenterY = 450;
+      health = 100;
     }
     public void highperspace()
     {
@@ -54,5 +61,9 @@ class SpaceShip extends Floater
     {
       myCenterX += myDirectionX;    
       myCenterY += myDirectionY; 
+    }
+    public void changeHealth()
+    {
+      
     }
 }

@@ -1,6 +1,9 @@
 SpaceShip theShip;
 Star [] stars;
 Camera theCamera;
+int mapHeight = 5000;
+int mapWidth = 5000;
+Stats playerstats;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
 //your variable declarations here
@@ -9,30 +12,15 @@ public void setup()
   //your code here
   theCamera = new Camera();
   theShip = new SpaceShip();
+  playerstats = new Stats();
   size(1024, 900);
   stars = new Star[(int) (Math.random() * 3000 + 500)];
-  //theAsteroids = new Asteroid[10];
   theAsteroids = new ArrayList <Asteroid>();
-  //Asteroids someAsteroid = new Asteroid();
-  //theAsteroids.add(someAsteroid);
-  //theAsteroids.add(new Asteroid());
-  //theAsteroids.remove(1);
-  /*for (int q = 0; q < theAsteroids.length; q++)
-  {
-    theAsteroids[q] = new Asteroid();
-    theAsteroids[q].setPointDirection((int) (Math.random() * 360));
-    theAsteroids[q].accelerate(Math.random() * 10 - 5);
-  }*/
-  for (int q = 0; q < 10; q++)
+  for (int q = 0; q < 100; q++)
   {
     theAsteroids.add(new Asteroid());
-    theAsteroids.get(q).setPointDirection(20);
-    System.out.println(theAsteroids.get(q).getPointDirection());
-    //theAsteroids.set(q, new Asteroid());
-    //theAsteroids(q).setPointDirection((int) (Math.random() * 360));
-    //theAsteroids(q).accelerate(Math.random() * 10 - 5);
-    //theAsteroid set (q, Asteroid.setPointDirection((int) (Math.random() * 360)));
-    //theAsteroids.setPointDirection((int) (Math.random() * 360));
+    theAsteroids.get(q).setPointDirection((int) (Math.random() * 360));
+    theAsteroids.get(q).accelerate(Math.random() * 10 - 5);
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -44,7 +32,8 @@ public void draw()
   //your code here
   background(255, 0, 0);
   fill(0);
-  rect(0, 0, 5000, 5000);
+  rect(0, 0, mapHeight, mapWidth);
+  playerstats.show();
   duringGame();
   theShip.show();
   theShip.move();
@@ -52,11 +41,11 @@ public void draw()
   {
     stars[j].show();
   }
-  /*for (int u = 0; u < theAsteroids.length; u++)
+  for (int u = 0; u < 100; u++)
   {
-    theAsteroids[u].show();
-    theAsteroids[u].move();
-  }*/
+    theAsteroids.get(u).show();
+    theAsteroids.get(u).move();
+  }
 }
 class Star
 {
