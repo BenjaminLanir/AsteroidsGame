@@ -64,6 +64,39 @@ class SpaceShip extends Floater
     }
     public void changeHealth()
     {
-      
+      if(myCenterX < 0)
+      {
+        health = health - Math.abs(myDirectionX);
+        myCenterX = 1;
+        myDirectionX = (-1/2) * myDirectionX;
+        theCamera.teleport();
+        myDirectionX = 0;
+      }
+      else if(myCenterX > mapWidth)
+      {
+        health = health - Math.abs(myDirectionX);
+        myCenterX = mapWidth - 1;
+        myDirectionX = (-1/2) * myDirectionX;
+        theCamera.teleport();
+        myDirectionX = 0;
+      }
+      else if(myCenterY < 0)
+      {
+        health = health - Math.abs(myDirectionY);
+        myCenterY = 1;
+        myDirectionY = (-1/2) * myDirectionY;
+        theCamera.teleport();
+        myDirectionY = 0;
+      }
+      else if(myCenterY > mapHeight)
+      {
+        health = health - Math.abs(myDirectionY);
+        myCenterY = mapHeight - 1;
+        myDirectionY = (-1/2) * myDirectionY;
+        theCamera.teleport();
+        myDirectionY = 0;
+      }
+      else
+      {}
     }
 }

@@ -3,6 +3,7 @@ Star [] stars;
 Camera theCamera;
 int mapHeight = 5000;
 int mapWidth = 5000;
+//Bullet shipBullet;
 Stats playerstats;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
@@ -11,6 +12,7 @@ public void setup()
 {
   //your code here
   theCamera = new Camera();
+  //shipBullet = new Bullet(theShip);
   theShip = new SpaceShip();
   playerstats = new Stats();
   size(1024, 900);
@@ -30,13 +32,18 @@ public void setup()
 public void draw() 
 {
   //your code here
-  background(255, 0, 0);
+  background(255, 0, 0, 255);
   fill(0);
   rect(0, 0, mapHeight, mapWidth);
   playerstats.show();
+  playerstats.updateStats();
+  theShip.changeHealth();
+  fill(0);
+  strokeWeight(1);
   duringGame();
   theShip.show();
   theShip.move();
+  //shipBullet.show();
   for (int j = 0; j < stars.length; j++)
   {
     stars[j].show();
@@ -168,10 +175,12 @@ public void keyPressed()
   if (key == 'j')
   {
     theShip.highperspace();
+    theCamera.teleport();
   }
 }
 public void duringGame()
 {
   translate(-theCamera.position.x, -theCamera.position.y);
   theCamera.move();
+  //theCamera.teleport();
 }
