@@ -3,7 +3,7 @@ Star [] stars;
 Camera theCamera;
 int mapHeight = 5000;
 int mapWidth = 5000;
-//Bullet shipBullet;
+ArrayList <Bullet> shipBullet;
 Stats playerstats;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
@@ -12,8 +12,8 @@ public void setup()
 {
   //your code here
   theCamera = new Camera();
-  //shipBullet = new Bullet(theShip);
   theShip = new SpaceShip();
+  shipBullet = new ArrayList <Bullet>();
   playerstats = new Stats();
   size(1024, 900);
   stars = new Star[(int) (Math.random() * 3000 + 500)];
@@ -43,7 +43,29 @@ public void draw()
   duringGame();
   theShip.show();
   theShip.move();
-  //shipBullet.show();
+  theShip.setCannonHeat(theShip.getCannonHeat() - 1);
+  for (int c = 0; c < shipBullet.size(); c++)
+  {
+    shipBullet.get(c).show();
+    shipBullet.get(c).move();
+    //removes bullets after leaving screen
+    if (shipBullet.get(c).getX() > mapWidth)
+    {
+      shipBullet.remove(c);
+    } 
+    else if(shipBullet.get(c).getX() < 0)
+    {
+      shipBullet.remove(c);
+    }
+    else if(shipBullet.get(c).getY() > mapHeight)
+    {
+      shipBullet.remove(c);
+    }
+    else if(shipBullet.get(c).getY() < 0)
+    {
+      shipBullet.remove(c);
+    }
+  }
   for (int j = 0; j < stars.length; j++)
   {
     stars[j].show();
@@ -176,6 +198,12 @@ public void keyPressed()
   {
     theShip.highperspace();
     theCamera.teleport();
+  }
+  if (key == ' ')
+  {
+    //create new bullet
+    shipBullet.add(new Bullet());
+    theShip.setCannonHeat(theShip.getCannonHeat() + 1);
   }
 }
 public void duringGame()

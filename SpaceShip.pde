@@ -1,6 +1,7 @@
 class SpaceShip extends Floater  
 {   
   private double health;
+  private double cannonHeat;
   public void setX(int x)
   {
     myCenterX = x;
@@ -31,6 +32,11 @@ class SpaceShip extends Floater
     health = w;
   }
   public double getHealth(){return health;}
+  public void setCannonHeat(double c)
+  {
+    cannonHeat = c;
+  }
+  public double getCannonHeat(){return cannonHeat;}
   public SpaceShip()
     {
       corners = 4;
@@ -48,6 +54,7 @@ class SpaceShip extends Floater
       myCenterX = 512;
       myCenterY = 450;
       health = 100;
+      cannonHeat = 0;
     }
     public void highperspace()
     {

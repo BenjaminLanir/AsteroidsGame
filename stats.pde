@@ -4,7 +4,7 @@ class Stats
 	public Stats()
 	{
 		statHealth = theShip.getHealth();
-		statOverheat = 0;
+		statOverheat = theShip.getCannonHeat();
 		statFuel = 100;
 	}
 	public void show()
@@ -36,7 +36,7 @@ class Stats
 	public void updateStats()
 	{
 		statHealth = theShip.getHealth();
-		statOverheat = 0;
+		statOverheat = theShip.getCannonHeat();
 		statFuel = 100;
 	}
 }

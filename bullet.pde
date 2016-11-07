@@ -1,4 +1,4 @@
-/*class Bullet extends Floater
+class Bullet extends Floater
 {
   public void setX(int x)
   {
@@ -25,7 +25,7 @@
     myPointDirection = degrees;
   }
   public double getPointDirection(){return myPointDirection;}
-	Bullet(SpaceShip theShip)
+	Bullet()
 	{
 		myCenterX = theShip.getX();
 		myCenterY = theShip.getY();
@@ -33,6 +33,7 @@
 		double dRadians = myPointDirection*(Math.PI/180);
 		myDirectionX = 5 * Math.cos(dRadians) + theShip.getDirectionX();
 		myDirectionY = 5 * Math.sin(dRadians) + theShip.getDirectionY();
+		myColor = (255);
 	}
 	void show()
 	{
@@ -40,4 +41,9 @@
 		stroke(myColor);
 		ellipse((float) myCenterX, (float) myCenterY, 10, 10);
 	}
-}*/
+	void move()
+	{
+	  myCenterX += myDirectionX;    
+      myCenterY += myDirectionY;
+	}
+}
