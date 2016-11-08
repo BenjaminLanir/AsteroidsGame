@@ -1,10 +1,12 @@
 SpaceShip theShip;
+int levels = 0;
 Star [] stars;
 Camera theCamera;
 int mapHeight = 5000;
 int mapWidth = 5000;
 ArrayList <Bullet> shipBullet;
 Stats playerstats;
+Button playButton;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
 //your variable declarations here
@@ -13,6 +15,7 @@ public void setup()
   //your code here
   theCamera = new Camera();
   theShip = new SpaceShip();
+  playButton = new Button(124, 50, 450, 425);
   shipBullet = new ArrayList <Bullet>();
   playerstats = new Stats();
   size(1024, 900);
@@ -32,49 +35,60 @@ public void setup()
 public void draw() 
 {
   //your code here
-  background(255, 0, 0, 255);
-  fill(0);
-  rect(0, 0, mapHeight, mapWidth);
-  playerstats.show();
-  playerstats.updateStats();
-  theShip.changeHealth();
-  fill(0);
-  strokeWeight(1);
-  duringGame();
-  theShip.show();
-  theShip.move();
-  theShip.setCannonHeat(theShip.getCannonHeat() - 1);
-  for (int c = 0; c < shipBullet.size(); c++)
+  //different levels
+  if (levels == 0) //start screen
   {
-    shipBullet.get(c).show();
-    shipBullet.get(c).move();
-    //removes bullets after leaving screen
-    if (shipBullet.get(c).getX() > mapWidth)
+    playButton.show();
+  }
+  else if (levels == 1) //in game
+  {
+    background(255, 0, 0, 255);
+    fill(0);
+    rect(0, 0, mapHeight, mapWidth);
+    playerstats.show();
+    playerstats.updateStats();
+    theShip.changeHealth();
+    fill(0);
+    strokeWeight(1);
+    duringGame();
+    theShip.show();
+    theShip.move();
+    theShip.setCannonHeat(theShip.getCannonHeat() - 1);
+    for (int c = 0; c < shipBullet.size(); c++)
     {
+      shipBullet.get(c).show();
+      shipBullet.get(c).move();
+      //removes bullets after leaving screen
+      if (shipBullet.get(c).getX() > mapWidth)
+      {
+        shipBullet.remove(c);
+      } 
+      else if(shipBullet.get(c).getX() < 0)
+      {
       shipBullet.remove(c);
-    } 
-    else if(shipBullet.get(c).getX() < 0)
-    {
-      shipBullet.remove(c);
+      }
+      else if(shipBullet.get(c).getY() > mapHeight)
+      {
+        shipBullet.remove(c);
+      }
+      else if(shipBullet.get(c).getY() < 0)
+      {
+        shipBullet.remove(c);
+      }
     }
-    else if(shipBullet.get(c).getY() > mapHeight)
+    for (int j = 0; j < stars.length; j++)
     {
-      shipBullet.remove(c);
+      stars[j].show();
     }
-    else if(shipBullet.get(c).getY() < 0)
+    for (int u = 0; u < 100; u++)
     {
-      shipBullet.remove(c);
+      theAsteroids.get(u).show();
+      theAsteroids.get(u).move();
     }
   }
-  for (int j = 0; j < stars.length; j++)
-  {
-    stars[j].show();
-  }
-  for (int u = 0; u < 100; u++)
-  {
-    theAsteroids.get(u).show();
-    theAsteroids.get(u).move();
-  }
+    else if (levels == 2) //end game
+    {
+    }
 }
 class Star
 {
@@ -205,6 +219,13 @@ public void keyPressed()
     shipBullet.add(new Bullet());
     theShip.setCannonHeat(theShip.getCannonHeat() + 1);
   }
+}
+public void mousePressed() 
+{
+  if (levels == 0)
+  {
+    playButton.updateButton();
+  }  
 }
 public void duringGame()
 {
