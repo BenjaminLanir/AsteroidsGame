@@ -1,11 +1,13 @@
 class Stats
 {
+	private boolean overheat;
 	private double statHealth, statOverheat, statFuel;
 	public Stats()
 	{
 		statHealth = theShip.getHealth();
 		statOverheat = theShip.getCannonHeat();
 		statFuel = 100;
+		overheat = false;
 	}
 	public void show()
 	{
@@ -23,9 +25,9 @@ class Stats
 		rect(850, 500, (float) statOverheat * 1.24, 17);
 		fill(255);
 		stroke(255);
-		text("Health", 893, 330);
-		text("Fuel", 900, 430);
-		text("Cannon Heat", 880, 530);
+		text("Health", 880, 350);
+		text("Fuel", 895, 450);
+		text("Cannon Heat", 850, 550);
 		fill(0, 0, 0, 0);
 		stroke(0);
 		strokeWeight(5);
@@ -38,5 +40,17 @@ class Stats
 		statHealth = theShip.getHealth();
 		statOverheat = theShip.getCannonHeat();
 		statFuel = 100;
+	}
+	public boolean getOverheat(){return overheat;}
+	public void cannonOverheat()
+	{
+		if (theShip.getCannonHeat() > 100)
+		{
+			overheat = true;
+		}
+		if (theShip.getCannonHeat() == 0)
+		{
+			overheat = false;
+		}
 	}
 }

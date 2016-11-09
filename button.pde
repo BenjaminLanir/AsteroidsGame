@@ -3,7 +3,8 @@ class Button
 	private color myColor;
 	private double myWidth, myHeight, myX, myY;
 	private boolean pressed;
-	public Button(double w, double x, double y, double z)
+	private String buttonText;
+	public Button(double w, double x, double y, double z, String h)
 	{
 		myWidth = w;
 		myHeight = x;
@@ -11,12 +12,17 @@ class Button
 		myY = z;
 		pressed = false;
 		myColor = color(0, 0, 0);
+		buttonText = h;
 	}
 	public void updateButton()
 	{
 		if (mouseX > myX && mouseY > myY && mouseX < (myX + myWidth) && mouseY < (myY + myHeight))
 		{
 			pressed = true;
+		}
+		else
+		{
+			pressed = false;
 		}
 	}
 	public void show()
@@ -29,6 +35,7 @@ class Button
 		{
 			myColor = color(0, 0, 0);
 		}
+
 		else if (pressed == true)
 		{
 			myColor = color(255, 0, 0);
@@ -37,6 +44,9 @@ class Button
 		stroke(0);
 		strokeWeight(2);
 		rect((float) myX, (float) myY, (float) myWidth, (float) myHeight);
+		fill(255);
+		textSize(20);
+		text(buttonText, (float) myX + 42, (float) myY + 30);
 	}
 	public boolean getPressed(){return pressed;}
 }

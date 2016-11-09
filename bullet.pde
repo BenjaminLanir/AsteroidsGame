@@ -38,7 +38,7 @@ class Bullet extends Floater
 	void show()
 	{
 		fill(myColor);
-		stroke(myColor);
+		noStroke();
 		ellipse((float) myCenterX, (float) myCenterY, 10, 10);
 	}
 	void move()

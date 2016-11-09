@@ -15,7 +15,7 @@ public void setup()
   //your code here
   theCamera = new Camera();
   theShip = new SpaceShip();
-  playButton = new Button(124, 50, 450, 425);
+  playButton = new Button(124, 50, 450, 425, "Play");
   shipBullet = new ArrayList <Bullet>();
   playerstats = new Stats();
   size(1024, 900);
@@ -39,6 +39,10 @@ public void draw()
   if (levels == 0) //start screen
   {
     playButton.show();
+    if (playButton.getPressed() == true)
+    {
+      levels = 1;
+    }
   }
   else if (levels == 1) //in game
   {
@@ -53,7 +57,10 @@ public void draw()
     duringGame();
     theShip.show();
     theShip.move();
-    theShip.setCannonHeat(theShip.getCannonHeat() - 1);
+    if (theShip.getCannonHeat() != 0)
+    {
+      theShip.setCannonHeat(theShip.getCannonHeat() - 1);
+    }
     for (int c = 0; c < shipBullet.size(); c++)
     {
       shipBullet.get(c).show();
@@ -80,14 +87,26 @@ public void draw()
     {
       stars[j].show();
     }
-    for (int u = 0; u < 100; u++)
+    for (int u = 0; u < theAsteroids.size(); u++)
     {
       theAsteroids.get(u).show();
       theAsteroids.get(u).move();
     }
+    for (int q = 0; q < theAsteroids.size(); q++)
+    {
+      if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 20)
+      {
+        theAsteroids.remove(q);
+      }
+    }
+    if (theShip.getHealth() < 0)
+    {
+      levels = 2;
+    }
   }
     else if (levels == 2) //end game
     {
+      background(0);
     }
 }
 class Star
@@ -216,8 +235,11 @@ public void keyPressed()
   if (key == ' ')
   {
     //create new bullet
-    shipBullet.add(new Bullet());
-    theShip.setCannonHeat(theShip.getCannonHeat() + 1);
+    if (playerstats.getOverheat() == false)
+    {
+      shipBullet.add(new Bullet());
+      theShip.setCannonHeat(theShip.getCannonHeat() + 3);
+    }
   }
 }
 public void mousePressed() 
