@@ -32,8 +32,8 @@ class Asteroid extends Floater
     xCorners = new int[corners];
     yCorners = new int[corners];
     myColor = (122);
-    myCenterX = (Math.random() * 5000);
-    myCenterY = (Math.random() * 5000);
+    myCenterX = (Math.random() * mapWidth);
+    myCenterY = (Math.random() * mapHeight);
     mySpinSpeed = (int) (Math.random() * 50 - 25);
     /*for (int w = 0; w < corners; w++)
     {

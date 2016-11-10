@@ -41,7 +41,7 @@ class Button
 			myColor = color(255, 0, 0);
 		}
 		fill(myColor);
-		stroke(0);
+		stroke(255);
 		strokeWeight(2);
 		rect((float) myX, (float) myY, (float) myWidth, (float) myHeight);
 		fill(255);

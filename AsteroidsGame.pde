@@ -2,8 +2,8 @@ SpaceShip theShip;
 int levels = 0;
 Star [] stars;
 Camera theCamera;
-int mapHeight = 5000;
-int mapWidth = 5000;
+int mapHeight = 10000;
+int mapWidth = 10000;
 ArrayList <Bullet> shipBullet;
 Stats playerstats;
 Button playButton;
@@ -35,6 +35,11 @@ public void setup()
 public void draw() 
 {
   //your code here
+  background(0);
+    for (int j = 0; j < stars.length; j++)
+    {
+      stars[j].show();
+    }
   //different levels
   if (levels == 0) //start screen
   {
@@ -46,7 +51,6 @@ public void draw()
   }
   else if (levels == 1) //in game
   {
-    background(255, 0, 0, 255);
     fill(0);
     rect(0, 0, mapHeight, mapWidth);
     playerstats.show();
@@ -61,6 +65,7 @@ public void draw()
     {
       theShip.setCannonHeat(theShip.getCannonHeat() - 1);
     }
+    playerstats.cannonOverheat();
     for (int c = 0; c < shipBullet.size(); c++)
     {
       shipBullet.get(c).show();
@@ -92,11 +97,25 @@ public void draw()
       theAsteroids.get(u).show();
       theAsteroids.get(u).move();
     }
+    //detects if ship hit asteroids
     for (int q = 0; q < theAsteroids.size(); q++)
     {
-      if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 20)
+      if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 30)
       {
         theAsteroids.remove(q);
+        theShip.setHealth(theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY()));
+      }
+    }
+    //detects if bullet hit asteroids3
+    for (int g = 0; g < theAsteroids.size(); g++)
+    {
+      for (int n = 0; n <shipBullet.size(); n++)
+      {
+        if (dist(theAsteroids.get(g).getX(), theAsteroids.get(g).getY(), shipBullet.get(n).getX(), shipBullet.get(n).getY()) < 30)
+        {
+          theAsteroids.remove(g);
+          shipBullet.remove(n);
+        }
       }
     }
     if (theShip.getHealth() < 0)
@@ -106,7 +125,6 @@ public void draw()
   }
     else if (levels == 2) //end game
     {
-      background(0);
     }
 }
 class Star
@@ -116,8 +134,8 @@ class Star
   //int [] starY;
   public Star()
   {
-    myX = (int) (Math.random() * 5000);
-    myY = (int) (Math.random() * 5000);
+    myX = (int) (Math.random() * mapWidth);
+    myY = (int) (Math.random() * mapHeight);
     /*numStars = (int) (Math.random() * 200);
     starX = new int[numStars];
     starY = new int[numStars];
@@ -240,6 +258,8 @@ public void keyPressed()
       shipBullet.add(new Bullet());
       theShip.setCannonHeat(theShip.getCannonHeat() + 3);
     }
+    else
+    {}
   }
 }
 public void mousePressed() 

@@ -47,7 +47,7 @@ class Stats
 		if (theShip.getCannonHeat() > 100)
 		{
 			overheat = true;
-		}
+		}		
 		if (theShip.getCannonHeat() == 0)
 		{
 			overheat = false;
