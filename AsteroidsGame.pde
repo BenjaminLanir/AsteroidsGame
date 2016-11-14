@@ -7,6 +7,7 @@ int mapWidth = 10000;
 ArrayList <Bullet> shipBullet;
 Stats playerstats;
 Button playButton;
+EnemyShip testEnemy;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
 //your variable declarations here
@@ -18,6 +19,7 @@ public void setup()
   playButton = new Button(124, 50, 450, 425, "Play");
   shipBullet = new ArrayList <Bullet>();
   playerstats = new Stats();
+  testEnemy = new EnemyShip();
   size(1024, 900);
   stars = new Star[(int) (Math.random() * 3000 + 500)];
   theAsteroids = new ArrayList <Asteroid>();
@@ -61,6 +63,9 @@ public void draw()
     duringGame();
     theShip.show();
     theShip.move();
+    testEnemy.show();
+    testEnemy.track();
+    testEnemy.move();
     if (theShip.getCannonHeat() != 0)
     {
       theShip.setCannonHeat(theShip.getCannonHeat() - 1);

@@ -1,7 +1,7 @@
 class SpaceShip extends Floater  
 {   
-  private double health;
-  private double cannonHeat;
+  protected double health;
+  protected double cannonHeat;
   public void setX(int x)
   {
     myCenterX = x;
