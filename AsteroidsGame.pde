@@ -14,6 +14,7 @@ ArrayList <Asteroid> theAsteroids;
 public void setup() 
 {
   //your code here
+  frameRate(60);
   theCamera = new Camera();
   theShip = new SpaceShip();
   playButton = new Button(124, 50, 450, 425, "Play");
@@ -40,7 +41,7 @@ public void draw()
   background(0);
     for (int j = 0; j < stars.length; j++)
     {
-      stars[j].show();
+      //stars[j].show();
     }
   //different levels
   if (levels == 0) //start screen
@@ -68,7 +69,7 @@ public void draw()
     testEnemy.move();
     if (theShip.getCannonHeat() != 0)
     {
-      theShip.setCannonHeat(theShip.getCannonHeat() - 1);
+      theShip.setCannonHeat(theShip.getCannonHeat() - 0.5);
     }
     playerstats.cannonOverheat();
     for (int c = 0; c < shipBullet.size(); c++)
@@ -261,7 +262,7 @@ public void keyPressed()
     if (playerstats.getOverheat() == false)
     {
       shipBullet.add(new Bullet());
-      theShip.setCannonHeat(theShip.getCannonHeat() + 3);
+      theShip.setCannonHeat(theShip.getCannonHeat() + 1);
     }
     else
     {}

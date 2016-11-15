@@ -39,7 +39,7 @@ class Bullet extends Floater
 	{
 		fill(myColor);
 		stroke(0, 0, 0, 0);
-		ellipse((float) myCenterX, (float) myCenterY, 3, 3);
+		ellipse((float) myCenterX, (float) myCenterY, 6, 6);
 	}
 	void move()
 	{

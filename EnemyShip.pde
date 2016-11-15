@@ -18,9 +18,17 @@ class EnemyShip extends SpaceShip
       myCenterY = 450;
       health = 100;
       cannonHeat = 0;
+      myColor = color(255, 0, 0);
 	}
 	public void track()
 	{
-	    myPointDirection = Math.atan((theShip.getY() - myCenterY) / (theShip.getX() - myCenterX));
+	    if (theShip.getX() < myCenterX)
+	    {
+	        myPointDirection = 180 + Math.atan((theShip.getY() - myCenterY) / (theShip.getX() - myCenterX)) / (Math.PI/180);
+	    }
+	    else
+	    {
+	    	myPointDirection = Math.atan((theShip.getY() - myCenterY) / (theShip.getX() - myCenterX)) / (Math.PI/180);
+	    }
 	}
 }

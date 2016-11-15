@@ -50,7 +50,7 @@ class SpaceShip extends Floater
       yCorners[2] = 8;
       xCorners[3] = 16;
       yCorners[3] = 0;
-      myColor = 255;
+      myColor = color(0, 0, 255);
       myCenterX = 512;
       myCenterY = 450;
       health = 100;
