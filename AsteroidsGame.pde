@@ -10,6 +10,12 @@ Button playButton;
 EnemyShip testEnemy;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
+boolean wPressed = false;
+boolean aPressed = false;
+boolean dPressed = false;
+boolean sPressed = false;
+boolean spacePressed = false;
+boolean jPressed = false;
 //your variable declarations here
 public void setup() 
 {
@@ -54,84 +60,11 @@ public void draw()
   }
   else if (levels == 1) //in game
   {
-    fill(0);
-    rect(0, 0, mapHeight, mapWidth);
-    playerstats.show();
-    playerstats.updateStats();
-    theShip.changeHealth();
-    fill(0);
-    strokeWeight(1);
-    duringGame();
-    theShip.show();
-    theShip.move();
-    testEnemy.show();
-    testEnemy.track();
-    testEnemy.move();
-    if (theShip.getCannonHeat() != 0)
-    {
-      theShip.setCannonHeat(theShip.getCannonHeat() - 0.5);
-    }
-    playerstats.cannonOverheat();
-    for (int c = 0; c < shipBullet.size(); c++)
-    {
-      shipBullet.get(c).show();
-      shipBullet.get(c).move();
-      //removes bullets after leaving screen
-      if (shipBullet.get(c).getX() > mapWidth)
-      {
-        shipBullet.remove(c);
-      } 
-      else if(shipBullet.get(c).getX() < 0)
-      {
-      shipBullet.remove(c);
-      }
-      else if(shipBullet.get(c).getY() > mapHeight)
-      {
-        shipBullet.remove(c);
-      }
-      else if(shipBullet.get(c).getY() < 0)
-      {
-        shipBullet.remove(c);
-      }
-    }
-    for (int j = 0; j < stars.length; j++)
-    {
-      stars[j].show();
-    }
-    for (int u = 0; u < theAsteroids.size(); u++)
-    {
-      theAsteroids.get(u).show();
-      theAsteroids.get(u).move();
-    }
-    //detects if ship hit asteroids
-    for (int q = 0; q < theAsteroids.size(); q++)
-    {
-      if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 30)
-      {
-        theAsteroids.remove(q);
-        theShip.setHealth(theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY()));
-      }
-    }
-    //detects if bullet hit asteroids3
-    for (int g = 0; g < theAsteroids.size(); g++)
-    {
-      for (int n = 0; n <shipBullet.size(); n++)
-      {
-        if (dist(theAsteroids.get(g).getX(), theAsteroids.get(g).getY(), shipBullet.get(n).getX(), shipBullet.get(n).getY()) < 30)
-        {
-          theAsteroids.remove(g);
-          shipBullet.remove(n);
-        }
-      }
-    }
-    if (theShip.getHealth() < 0)
-    {
-      levels = 2;
-    }
+    duringTheGame();
   }
-    else if (levels == 2) //end game
-    {
-    }
+  else if (levels == 2) //end game
+  {
+  }
 }
 class Star
 {
@@ -157,115 +90,61 @@ class Star
     ellipse(myX, myY, 10, 10);
   }
 }
-abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
-{   
-  protected int corners;  //the number of corners, a triangular floater has 3   
-  protected int[] xCorners;   
-  protected int[] yCorners;   
-  protected int myColor;   
-  protected double myCenterX, myCenterY; //holds center coordinates   
-  protected double myDirectionX, myDirectionY; //holds x and y coordinates of the vector for direction of travel   
-  protected double myPointDirection; //holds current direction the ship is pointing in degrees    
-  abstract public void setX(int x);  
-  abstract public int getX();   
-  abstract public void setY(int y);   
-  abstract public int getY();   
-  abstract public void setDirectionX(double x);   
-  abstract public double getDirectionX();   
-  abstract public void setDirectionY(double y);   
-  abstract public double getDirectionY();   
-  abstract public void setPointDirection(int degrees);   
-  abstract public double getPointDirection(); 
-
-  //Accelerates the floater in the direction it is pointing (myPointDirection)   
-  public void accelerate (double dAmount)   
-  {          
-    //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
-    //change coordinates of direction of travel    
-    myDirectionX += ((dAmount) * Math.cos(dRadians));    
-    myDirectionY += ((dAmount) * Math.sin(dRadians));       
-  }   
-  public void rotate (int nDegreesOfRotation)   
-  {     
-    //rotates the floater by a given number of degrees    
-    myPointDirection+=nDegreesOfRotation;   
-  }   
-  public void move ()   //move the floater in the current direction of travel
-  {      
-    //change the x and y coordinates by myDirectionX and myDirectionY       
-    myCenterX += myDirectionX;    
-    myCenterY += myDirectionY;     
-
-    //wrap around screen    
-    if(myCenterX >width)
-    {     
-      myCenterX = 0;    
-    }    
-    else if (myCenterX<0)
-    {     
-      myCenterX = width;    
-    }    
-    if(myCenterY >height)
-    {    
-      myCenterY = 0;    
-    }   
-    else if (myCenterY < 0)
-    {     
-      myCenterY = height;    
-    }   
-  }   
-  public void show ()  //Draws the floater at the current position  
-  {             
-    fill(myColor);   
-    stroke(myColor);    
-    //convert degrees to radians for sin and cos         
-    double dRadians = myPointDirection*(Math.PI/180);                 
-    int xRotatedTranslated, yRotatedTranslated;    
-    beginShape();         
-    for(int nI = 0; nI < corners; nI++)    
-    {     
-      //rotate and translate the coordinates of the floater using current direction 
-      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
-      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
-      vertex(xRotatedTranslated,yRotatedTranslated);    
-    }   
-    endShape(CLOSE);  
-  }   
-} 
 public void keyPressed()
 {
-  if (key == 'w')
+  if (theShip.getFuel() > 0)
   {
-    theShip.accelerate(.3);
-  }
-  if (key == 's')
-  {
-    theShip.accelerate(-.3);
+    if (key == 'w')
+    {
+      wPressed = true;
+    }
+    if (key == 's')
+    {
+      sPressed = true;
+    }
   }
   if (key == 'd')
   {
-    theShip.rotate(5);
+    dPressed = true;
   }
   if (key == 'a')
   {
-    theShip.rotate(-5);
+    aPressed = true;
   }
   if (key == 'j')
   {
-    theShip.highperspace();
-    theCamera.teleport();
+    jPressed = true;
   }
   if (key == ' ')
   {
-    //create new bullet
-    if (playerstats.getOverheat() == false)
-    {
-      shipBullet.add(new Bullet());
-      theShip.setCannonHeat(theShip.getCannonHeat() + 1);
-    }
-    else
-    {}
+    spacePressed = true;
+  }
+}
+public void keyReleased()
+{
+  if (key == 'w')
+  {
+    wPressed = false;
+  }
+  if (key == 's')
+  {
+    sPressed = false;
+  }
+  if (key == 'd')
+  {
+    dPressed = false;
+  }
+  if (key == 'a')
+  {
+    aPressed = false;
+  }
+  if (key == ' ')
+  {
+    spacePressed = false;
+  }
+  if (key == 'j')
+  {
+    jPressed = false;
   }
 }
 public void mousePressed() 

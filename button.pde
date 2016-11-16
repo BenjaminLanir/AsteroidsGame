@@ -46,7 +46,8 @@ class Button
 		rect((float) myX, (float) myY, (float) myWidth, (float) myHeight);
 		fill(255);
 		textSize(20);
-		text(buttonText, (float) myX + 42, (float) myY + 30);
+		textAlign(CENTER);
+		text(buttonText, (float) (myX + (myWidth/2)), (float) (myY + (myHeight/1.7)));
 	}
 	public boolean getPressed(){return pressed;}
 }

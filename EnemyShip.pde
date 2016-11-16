@@ -14,8 +14,8 @@ class EnemyShip extends SpaceShip
       xCorners[3] = 16;
       yCorners[3] = 0;
       myColor = 255;
-      myCenterX = 512;
-      myCenterY = 450;
+      myCenterX = 9500;
+      myCenterY = 9500;
       health = 100;
       cannonHeat = 0;
       myColor = color(255, 0, 0);
