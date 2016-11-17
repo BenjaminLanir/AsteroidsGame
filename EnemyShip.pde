@@ -1,6 +1,6 @@
 class EnemyShip extends SpaceShip
 {
-	public void EnemyShip()
+	public EnemyShip()
 	{
       corners = 4;
       xCorners = new int[corners];

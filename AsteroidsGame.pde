@@ -103,6 +103,11 @@ public void keyPressed()
       sPressed = true;
     }
   }
+  else
+  {
+    wPressed = false;
+    sPressed = false;
+  }
   if (key == 'd')
   {
     dPressed = true;

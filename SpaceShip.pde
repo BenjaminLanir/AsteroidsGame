@@ -65,8 +65,8 @@ class SpaceShip extends Floater
     }
     public void highperspace()
     {
-      myCenterX = (int) (Math.random() * 1024);
-      myCenterY = (int) (Math.random() * 900);
+      myCenterX = (int) (Math.random() * mapWidth);
+      myCenterY = (int) (Math.random() * mapHeight);
       myPointDirection = (int) (Math.random() * 360);
       myDirectionX = 0;
       myDirectionY = 0;

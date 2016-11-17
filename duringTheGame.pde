@@ -103,13 +103,21 @@ public void duringTheGame()
     }
     if (wPressed == true || sPressed == true)
     {
-      if (theShip.getFuel() != 0)
+      if (theShip.getFuel() > 0)
       {
-        theShip.setFuel(theShip.getFuel() - 1);
+        theShip.setFuel(theShip.getFuel() - 0.1);
       }
     }
     if (theShip.getHealth() < 0)
     {
       levels = 2;
+    }
+    //moves enemy ship toward theShip
+    if (distanceShips > 200 && distanceShips < 100)
+    {
+      testEnemy.accelerate(.3);
+    }
+    else if () {
+      
     }
 }
