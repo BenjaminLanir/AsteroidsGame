@@ -16,6 +16,7 @@ boolean dPressed = false;
 boolean sPressed = false;
 boolean spacePressed = false;
 boolean jPressed = false;
+double speed = 0;
 //your variable declarations here
 public void setup() 
 {
