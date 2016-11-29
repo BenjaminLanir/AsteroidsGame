@@ -115,18 +115,25 @@ public void duringTheGame()
       levels = 2;
     }
     //moves enemy ship toward theShip
-    double distanceShips = dist(theShip.getX(), theShip.getY(), testEnemy.getX(), testEnemy.getY());
     if (speed < 5)
     {
-      if (distanceShips > 200)
+      if (testEnemy.getDistance() > 200)
       {
         testEnemy.track();
-        testEnemy.accelerate(.3);
+        //testEnemy.accelerate(.3);
+        double dRadians =testEnemy.getPointDirection()*(Math.PI/180);     
+        //change coordinates of direction of travel    
+        double directionX = ((1) * Math.cos(dRadians));    
+        double directionY = ((1) * Math.sin(dRadians)); 
+        testEnemy.setDirectionX(0);
+        testEnemy.setDirectionY(0);
+        testEnemy.setDirectionX(directionX);
+        testEnemy.setDirectionY(directionY);
         System.out.println(testEnemy.getX() + testEnemy.getY());
         speed += .3;
       }
     }
-    else if (distanceShips < 100)
+    else if (testEnemy.getDistance() < 100)
     {
       //testEnemy.accelerate(-.3);
       testEnemy.setDirectionX(0);

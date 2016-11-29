@@ -31,4 +31,9 @@ class EnemyShip extends SpaceShip
 	    	myPointDirection = Math.atan((theShip.getY() - myCenterY) / (theShip.getX() - myCenterX)) / (Math.PI/180);
 	    }
 	}
+      public double getDistance()
+      {
+        double distance = dist(theShip.getX(), theShip.getY(), (float)myCenterX, (float)myCenterY);
+        return distance;
+      }
 }

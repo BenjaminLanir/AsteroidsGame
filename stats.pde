@@ -35,6 +35,15 @@ class Stats
 		rect(850, 300, 124, 17);
 		rect(850, 400, 124, 17);
 		rect(850, 500, 124, 17);
+		//miniMap
+		fill(0, 0, 0, 255);
+		rect(810, 10, 204, 204);
+		//scale everything
+		fill(0, 0, 255);
+		strokeWeight(0);
+		rect(theShip.getX() / (mapWidth / 204) + 810, theShip.getY() / (mapHeight / 204) + 10, 5, 5);
+		fill(255, 0, 0);
+		rect(testEnemy.getX() / (mapWidth / 204) + 810, testEnemy.getY() / (mapHeight / 204) + 10, 5, 5);
 	}
 	public void updateStats()
 	{
