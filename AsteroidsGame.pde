@@ -7,6 +7,7 @@ int mapWidth = 10000;
 ArrayList <Bullet> shipBullet;
 Stats playerstats;
 Button playButton;
+Button resetButton;
 EnemyShip testEnemy;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
@@ -16,6 +17,7 @@ boolean dPressed = false;
 boolean sPressed = false;
 boolean spacePressed = false;
 boolean jPressed = false;
+boolean mouseState = false;
 double speed = 0;
 //your variable declarations here
 public void setup() 
@@ -25,6 +27,7 @@ public void setup()
   theCamera = new Camera();
   theShip = new SpaceShip();
   playButton = new Button(124, 50, 450, 425, "Play");
+  resetButton = new Button(124, 50, 450, 425, "Respawn?");
   shipBullet = new ArrayList <Bullet>();
   playerstats = new Stats();
   testEnemy = new EnemyShip();
@@ -61,6 +64,23 @@ public void draw()
   }
   else if (levels == 2) //end game
   {
+    textSize(100);
+    fill(255);
+    stroke(255);
+    textAlign(CENTER);
+    text("Game Over", 512, 450);
+    if (mouseState == true)
+    {
+      levels = 3;
+    }
+  }
+  else if (levels == 3)
+  {
+    resetButton.show();
+    if (resetButton.getPressed() == true)
+    {
+      levels = 0;
+    }
   }
     for (int j = 0; j < stars.length; j++)
     {
@@ -154,14 +174,19 @@ public void keyReleased()
 }
 public void mousePressed() 
 {
+  mouseState = true;
   if (levels == 0)
   {
     playButton.updateButton();
   }  
 }
+public void mouseReleased()
+{
+  mouseState = false;
+}
 public void duringGame()
 {
   translate(-theCamera.position.x, -theCamera.position.y);
-  theCamera.move();
-  //theCamera.teleport();
+  //theCamera.move();
+  theCamera.teleport();
 }

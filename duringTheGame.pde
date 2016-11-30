@@ -86,7 +86,7 @@ public void duringTheGame()
       if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 30)
       {
         theAsteroids.remove(q);
-        theShip.setHealth(.005 *(theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
+        theShip.setHealth((theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
       }
     }
     //detects if bullet hit asteroids3
