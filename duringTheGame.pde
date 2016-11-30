@@ -73,7 +73,7 @@ public void duringTheGame()
     }
     for (int j = 0; j < stars.length; j++)
     {
-      stars[j].show();
+      //stars[j].show();
     }
     for (int u = 0; u < theAsteroids.size(); u++)
     {
@@ -86,7 +86,7 @@ public void duringTheGame()
       if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 30)
       {
         theAsteroids.remove(q);
-        theShip.setHealth(.01 *(theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
+        theShip.setHealth(.005 *(theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
       }
     }
     //detects if bullet hit asteroids3
@@ -100,6 +100,7 @@ public void duringTheGame()
           shipBullet.remove(n);
           n--;
           g--;
+          break;
         }
       }
     }
@@ -123,13 +124,13 @@ public void duringTheGame()
         //testEnemy.accelerate(.3);
         double dRadians =testEnemy.getPointDirection()*(Math.PI/180);     
         //change coordinates of direction of travel    
-        double directionX = ((1) * Math.cos(dRadians));    
-        double directionY = ((1) * Math.sin(dRadians)); 
+        double directionX = ((5) * Math.cos(dRadians));    
+        double directionY = ((5) * Math.sin(dRadians)); 
         testEnemy.setDirectionX(0);
         testEnemy.setDirectionY(0);
         testEnemy.setDirectionX(directionX);
         testEnemy.setDirectionY(directionY);
-        System.out.println(testEnemy.getX() + testEnemy.getY());
+        //System.out.println(testEnemy.getX() + testEnemy.getY());
         speed += .3;
       }
     }
@@ -141,5 +142,5 @@ public void duringTheGame()
       //speed = speed - .3;
       speed = 0;
     }
-    System.out.println(testEnemy.getX() + " , " + testEnemy.getY());
+    //System.out.println(testEnemy.getX() + " , " + testEnemy.getY());
 }

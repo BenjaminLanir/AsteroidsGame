@@ -44,6 +44,12 @@ class Stats
 		rect(theShip.getX() / (mapWidth / 204) + 810, theShip.getY() / (mapHeight / 204) + 10, 5, 5);
 		fill(255, 0, 0);
 		rect(testEnemy.getX() / (mapWidth / 204) + 810, testEnemy.getY() / (mapHeight / 204) + 10, 5, 5);
+		for (int i = 0; i < theAsteroids.size(); i++)
+		{
+			fill(122, 50, 10);
+			strokeWeight(0);
+			rect(theAsteroids.get(i).getX() / (mapWidth / 204) + 810, theAsteroids.get(i).getY() / (mapHeight / 204), 5, 5);
+		}
 	}
 	public void updateStats()
 	{

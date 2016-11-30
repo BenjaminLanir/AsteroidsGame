@@ -46,10 +46,6 @@ public void draw()
 {
   //your code here
   background(0);
-    for (int j = 0; j < stars.length; j++)
-    {
-      //stars[j].show();
-    }
   //different levels
   if (levels == 0) //start screen
   {
@@ -66,12 +62,14 @@ public void draw()
   else if (levels == 2) //end game
   {
   }
+    for (int j = 0; j < stars.length; j++)
+    {
+      stars[j].show();
+    }
 }
 class Star
 {
   private int myX, myY; //numStars;
-  //int [] starX;
-  //int [] starY;
   public Star()
   {
     myX = (int) (Math.random() * mapWidth);
