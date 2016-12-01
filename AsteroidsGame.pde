@@ -9,6 +9,7 @@ Stats playerstats;
 Button playButton;
 Button resetButton;
 EnemyShip testEnemy;
+ArrayList <EnemyShip> theEnemies;
 //Asteroid [] theAsteroids;
 ArrayList <Asteroid> theAsteroids;
 boolean wPressed = false;
@@ -22,6 +23,7 @@ double speed = 0;
 //your variable declarations here
 public void setup() 
 {
+  size(1024, 900);
   //your code here
   frameRate(60);
   theCamera = new Camera();
@@ -29,9 +31,9 @@ public void setup()
   playButton = new Button(124, 50, 450, 425, "Play");
   resetButton = new Button(124, 50, 450, 425, "Respawn?");
   shipBullet = new ArrayList <Bullet>();
+  theEnemies = new ArrayList <EnemyShip>();
   playerstats = new Stats();
   testEnemy = new EnemyShip();
-  size(1024, 900);
   stars = new Star[(int) (Math.random() * 3000 + 500)];
   theAsteroids = new ArrayList <Asteroid>();
   for (int q = 0; q < 100; q++)
@@ -39,6 +41,10 @@ public void setup()
     theAsteroids.add(new Asteroid());
     theAsteroids.get(q).setPointDirection((int) (Math.random() * 360));
     theAsteroids.get(q).accelerate(Math.random() * 10 - 5);
+  }
+  for (int m = 0; m < 10; m++)
+  {
+    theEnemies.add(new EnemyShip());
   }
   for (int i = 0; i < stars.length; i++)
   {
@@ -72,6 +78,7 @@ public void draw()
     if (mouseState == true)
     {
       levels = 3;
+      //theShip.setHealth(100);
     }
   }
   else if (levels == 3)

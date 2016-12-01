@@ -14,8 +14,8 @@ class EnemyShip extends SpaceShip
       xCorners[3] = 16;
       yCorners[3] = 0;
       myColor = 255;
-      myCenterX = 9500;
-      myCenterY = 9500;
+      myCenterX = Math.random() * 500 + 9250;
+      myCenterY = Math.random() * 500 + 9250;
       health = 100;
       cannonHeat = 0;
       myColor = color(255, 0, 0);
@@ -35,5 +35,13 @@ class EnemyShip extends SpaceShip
       {
         double distance = dist(theShip.getX(), theShip.getY(), (float)myCenterX, (float)myCenterY);
         return distance;
+      }
+      public void move()
+      {
+        if (Math.abs(myDirectionX * myDirectionX + myDirectionY * myDirectionY) > 5)
+        {
+          testEnemy.accelerate(-.3);
+        }
+        super.move();
       }
 }

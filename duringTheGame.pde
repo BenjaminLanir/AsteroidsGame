@@ -44,6 +44,12 @@ public void duringTheGame()
     testEnemy.show();
     testEnemy.track();
     testEnemy.move();
+    for (int j = 0; j < theEnemies.size(); j++)
+    {
+      theEnemies.get(j).show();
+      theEnemies.get(j).track();
+      theEnemies.get(j).move();
+    }
     if (theShip.getCannonHeat() != 0)
     {
       theShip.setCannonHeat(theShip.getCannonHeat() - 0.5);
@@ -121,26 +127,25 @@ public void duringTheGame()
       if (testEnemy.getDistance() > 200)
       {
         testEnemy.track();
-        //testEnemy.accelerate(.3);
+        testEnemy.accelerate(.3);
         double dRadians =testEnemy.getPointDirection()*(Math.PI/180);     
         //change coordinates of direction of travel    
-        double directionX = ((5) * Math.cos(dRadians));    
+        /*double directionX = ((5) * Math.cos(dRadians));    
         double directionY = ((5) * Math.sin(dRadians)); 
         testEnemy.setDirectionX(0);
         testEnemy.setDirectionY(0);
         testEnemy.setDirectionX(directionX);
-        testEnemy.setDirectionY(directionY);
+        testEnemy.setDirectionY(directionY);*/
         //System.out.println(testEnemy.getX() + testEnemy.getY());
-        speed += .3;
-      }
+        //speed += .3;
     }
-    else if (testEnemy.getDistance() < 100)
+    /*else if (testEnemy.getDistance() < 100)
     {
       //testEnemy.accelerate(-.3);
       testEnemy.setDirectionX(0);
       testEnemy.setDirectionY(0);
       //speed = speed - .3;
       speed = 0;
-    }
+    }*/
     //System.out.println(testEnemy.getX() + " , " + testEnemy.getY());
 }
