@@ -38,9 +38,9 @@ class EnemyShip extends SpaceShip
       }
       public void move()
       {
-        if (Math.abs(myDirectionX * myDirectionX + myDirectionY * myDirectionY) > 5)
+        if (Math.abs(myDirectionX * myDirectionX + myDirectionY * myDirectionY) > 100)
         {
-          testEnemy.accelerate(-.3);
+          accelerate(-.3);
         }
         super.move();
       }
