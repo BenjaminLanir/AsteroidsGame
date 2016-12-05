@@ -92,7 +92,10 @@ public void duringTheGame()
       if(dist(theShip.getX(), theShip.getY(), theAsteroids.get(q).getX(), theAsteroids.get(q).getY()) < 30)
       {
         theAsteroids.remove(q);
-        theShip.setHealth((theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
+        if (theShip.getShield() == 0)
+        {
+          theShip.setHealth((theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
+        }
       }
     }
     //detects if bullet hit asteroids3
@@ -128,7 +131,7 @@ public void duringTheGame()
       {
         //if (theEnemies.get(t).getDistance() > 200)
         {
-          theEnemies.get(t).track();
+          //theEnemies.get(t).track();
           theEnemies.get(t).accelerate(.3);
           double dRadians =testEnemy.getPointDirection()*(Math.PI/180);     
           //change coordinates of direction of travel    
@@ -143,4 +146,10 @@ public void duringTheGame()
         }
       }
     }
+  if (pPressed == true)
+  {
+    //pause
+    pPressed = false;
+    levels = 4;
+  }
 }

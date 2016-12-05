@@ -14,8 +14,8 @@ class EnemyShip extends SpaceShip
       xCorners[3] = 16;
       yCorners[3] = 0;
       myColor = 255;
-      myCenterX = Math.random() * 500 + 9250;
-      myCenterY = Math.random() * 500 + 9250;
+      myCenterX = Math.random() * 500 + mapWidth - 725;
+      myCenterY = Math.random() * 500 + mapHeight - 725;
       health = 100;
       cannonHeat = 0;
       myColor = color(255, 0, 0);
@@ -38,9 +38,11 @@ class EnemyShip extends SpaceShip
       }
       public void move()
       {
-        if (Math.abs(myDirectionX * myDirectionX + myDirectionY * myDirectionY) > 100)
+        if (Math.abs(myDirectionX * myDirectionX + myDirectionY * myDirectionY) >= 10)
         {
-          accelerate(-.3);
+          //myDirectionX --;
+          //myDirectionY --;
+          accelerate(-.1);
         }
         super.move();
       }

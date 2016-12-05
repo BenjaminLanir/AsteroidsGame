@@ -2,7 +2,7 @@ SpaceShip theShip;
 int levels = 0;
 Star [] stars;
 Camera theCamera;
-int mapHeight = 10000;
+int mapHeight = 1000;
 int mapWidth = 10000;
 ArrayList <Bullet> shipBullet;
 Stats playerstats;
@@ -18,6 +18,7 @@ boolean dPressed = false;
 boolean sPressed = false;
 boolean spacePressed = false;
 boolean jPressed = false;
+boolean pPressed = false;
 boolean mouseState = false;
 double speed = 0;
 //your variable declarations here
@@ -25,6 +26,10 @@ public void setup()
 {
   size(1024, 900);
   //your code here
+  setItUp();
+}
+public void setItUp()
+{
   frameRate(60);
   theCamera = new Camera();
   theShip = new SpaceShip();
@@ -101,6 +106,25 @@ public void draw()
       System.out.println("it worked");
       theShip.setHealth(100);
       theShip.setFuel(100);
+      setItUp();
+    }
+  }
+  else if (levels == 4)
+  {
+    for (int u = 0; u < theAsteroids.size(); u++)
+    {
+      theAsteroids.get(u).show();
+    }
+    theShip.show();
+    for (int w = 0; w < theEnemies.size(); w++)
+    {
+      theEnemies.get(w).show();
+    }
+    duringGame();
+    if (pPressed == true)
+    {
+      pPressed = false;
+      levels = 1;
     }
   }
     for (int j = 0; j < stars.length; j++)
@@ -164,6 +188,10 @@ public void keyPressed()
   if (key == ' ')
   {
     spacePressed = true;
+  }
+  if (key == 'p')
+  {
+    pPressed = true;
   }
 }
 public void keyReleased()

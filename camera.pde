@@ -12,8 +12,8 @@ class Camera
   }*/
   public void teleport()
   {
-    position.x = (float) theShip.getX() - 512;
-    position.y = (float) theShip.getY() - 450;
+    position.x = (float) theShip.getX() - 512 + (float)theShip.getDirectionX();
+    position.y = (float) theShip.getY() - 450 + (float)theShip.getDirectionY();
   }
   public PVector getVector() {return position;}
 }

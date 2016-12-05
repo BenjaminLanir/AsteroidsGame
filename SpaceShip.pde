@@ -3,6 +3,7 @@ class SpaceShip extends Floater
   protected double health;
   protected double cannonHeat;
   protected double fuel;
+  protected double shield;
   public void setX(int x)
   {
     myCenterX = x;
@@ -43,6 +44,11 @@ class SpaceShip extends Floater
     fuel = n;
   }
   public double getFuel(){return fuel;}
+  public void setShield(double g)
+  {
+    shield = g;
+  }
+  public double getShield(){return shield;}
   public SpaceShip()
     {
       corners = 4;
@@ -62,6 +68,7 @@ class SpaceShip extends Floater
       health = 100;
       cannonHeat = 0;
       fuel = 100;
+      shield = 3;
     }
     public void highperspace()
     {
