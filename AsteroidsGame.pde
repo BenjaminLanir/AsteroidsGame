@@ -111,6 +111,8 @@ public void draw()
   }
   else if (levels == 4)
   {
+    theCamera.teleport();
+    translate(-theCamera.getVector().x, -theCamera.getVector().y);
     for (int u = 0; u < theAsteroids.size(); u++)
     {
       theAsteroids.get(u).show();
@@ -120,7 +122,7 @@ public void draw()
     {
       theEnemies.get(w).show();
     }
-    duringGame();
+    //System.out.println(theCamera.getVector());
     if (pPressed == true)
     {
       pPressed = false;
@@ -293,7 +295,7 @@ class Stats
     {
       fill(122, 50, 10);
       strokeWeight(0);
-      rect(theAsteroids.get(i).getX() / (mapWidth / 204.0) + 810.0, theAsteroids.get(i).getY() / (mapHeight / 204.0), 5, 5);
+      rect(theAsteroids.get(i).getX() / (mapWidth / 204.0) + 810.0, theAsteroids.get(i).getY() / (mapHeight / 194.0) + 10, 5, 5);
     }
     for (int j = 0; j < theEnemies.size(); j++)
     {
