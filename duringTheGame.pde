@@ -33,7 +33,7 @@ public void duringTheGame()
   {
     if (playerstats.getOverheat() == false)
     {
-      shipBullet.add(new Bullet());
+      shipBullet.add(new Bullet(theShip));
       theShip.setCannonHeat(theShip.getCannonHeat() + 1);
     } else
     {
@@ -122,18 +122,61 @@ public void duringTheGame()
   {
     levels = 2;
   }
+  for (int xy = 0; xy < enemyBullet.size(); xy++)
+  {
+    enemyBullet.get(xy).show();
+    enemyBullet.get(xy).move();
+    if (shipBullet.get(xy).getX() > mapWidth)
+    {
+      enemyBullet.remove(xy);
+      xy--;
+    } else if (enemyBullet.get(xy).getX() < 0)
+    {
+      enemyBullet.remove(xy);
+      xy--;
+    } else if (enemyBullet.get(xy).getY() > mapHeight)
+    {
+      enemyBullet.remove(xy);
+      xy--;
+    } else if (enemyBullet.get(xy).getY() < 0)
+    {
+      enemyBullet.remove(xy);
+      xy--;
+    }
+  }
   //moves enemy ship toward theShip
   for (int t = 0; t < theEnemies.size(); t++)
   {
-    {
-      theEnemies.get(t).accelerate(.3);
+    { 
+      if (theEnemies.get(t).getDistance() > 300)
+      {
+        theEnemies.get(t).setDirectionX(0);
+        theEnemies.get(t).setDirectionY(0);  
+        theEnemies.get(t).accelerate(10);
+      }
+      else
+      {
+        enemyBullet.add(new Bullet(theEnemies.get(t)));
+        theEnemies.get(t).accelerate(0.1);
+      }
+      for (int z = 0; z < theEnemies.size(); z++)
+      {
+        if (t != z)
+        {
+          if (theEnemies.get(t).getX() == theEnemies.get(z).getX() && theEnemies.get(t).getY() == theEnemies.get(z).getY())
+          {
+            theEnemies.get(t).setX((int) (theEnemies.get(t).getX() + (Math.random() * 50 - 25)));
+            theEnemies.get(t).setY((int) (theEnemies.get(t).getY() + (Math.random() * 50 - 25)));
+          }
+        }
+      }
       double dRadians =testEnemy.getPointDirection()*(Math.PI/180);
       if (Math.abs(theEnemies.get(t).getDirectionX() * theEnemies.get(t).getDirectionX() + theEnemies.get(t).getDirectionY() * theEnemies.get(t).getDirectionY()) > 10)
       {
-        if (theEnemies.get(t).getPointDirection() == theEnemies.get(t).getPreviousDirection())
-        {
-          theEnemies.get(t).accelerate(-1);
-        }
+        //if (theEnemies.get(t).getPointDirection() == theEnemies.get(t).getPreviousDirection())
+        //{
+          //theEnemies.get(t).accelerate(-1);
+        //}
       }     
       //change coordinates of direction of travel    
       /*double directionX = ((5) * Math.cos(dRadians));    
