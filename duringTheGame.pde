@@ -94,6 +94,10 @@ public void duringTheGame()
       {
         theShip.setHealth((theShip.getHealth() - Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY())));
       }
+      else
+      {
+        theShip.setShield(theShip.getShield() - 1);
+      }
     }
   }
   //detects if bullet hit asteroids3
@@ -126,7 +130,7 @@ public void duringTheGame()
   {
     enemyBullet.get(xy).show();
     enemyBullet.get(xy).move();
-    if (shipBullet.get(xy).getX() > mapWidth)
+    if (enemyBullet.get(xy).getX() > mapWidth)
     {
       enemyBullet.remove(xy);
       xy--;
