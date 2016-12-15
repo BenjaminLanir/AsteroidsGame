@@ -35,9 +35,29 @@ public void duringTheGame()
     {
       shipBullet.add(new Bullet(theShip));
       theShip.setCannonHeat(theShip.getCannonHeat() + 1);
-    } else
+    } 
+    else
     {
     }
+  }
+  goodStation.show();
+  goodStation.editDistance();
+  badStation.show();
+  badStation.editDistance();
+  if (goodStation.getDistance() < 250)
+  {
+    if (theShip.getHealth() < 95)
+    {
+      theShip.setHealth(theShip.getHealth() + 0.2);
+    }
+    if (theShip.getFuel() < 95)
+    {
+      theShip.setFuel(theShip.getFuel() + 0.2);
+    }
+  }
+  if (badStation.getDistance() < 250)
+  {
+    theShip.setHealth(theShip.getHealth() - 0.5);
   }
   theShip.show();
   theShip.move();
@@ -147,6 +167,13 @@ public void duringTheGame()
       enemyBullet.remove(xy);
       xy--;
     }
+    if (dist(theShip.getX(), theShip.getY(), enemyBullet.get(xy).getX(), enemyBullet.get(xy).getY()) < 10)
+    {
+      enemyBullet.remove(xy);
+      theShip.setHealth(theShip.getHealth() - 0.5);
+      xy = xy - 1;
+      break;
+    }
   }
   //moves enemy ship toward theShip
   for (int t = 0; t < theEnemies.size(); t++)
@@ -198,5 +225,13 @@ public void duringTheGame()
     //pause
     pPressed = false;
     levels = 4;
+  }
+  nextShield ++;
+  if (nextShield % 1800 == 0)
+  {
+    if (theShip.getShield() != 3)
+    {
+      theShip.setShield(theShip.getShield() + 1);
+    }
   }
 }

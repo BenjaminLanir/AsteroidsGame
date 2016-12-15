@@ -21,7 +21,11 @@ boolean spacePressed = false;
 boolean jPressed = false;
 boolean pPressed = false;
 boolean mouseState = false;
+boolean rPressed = false;
 double speed = 0;
+SpaceStation goodStation;
+SpaceStation badStation;
+int nextShield = 0;
 //your variable declarations here
 public void setup() 
 {
@@ -42,6 +46,8 @@ public void setItUp()
   playerstats = new Stats();
   testEnemy = new EnemyShip();
   stars = new Star[(int) (Math.random() * 3000 + 500)];
+  goodStation = new SpaceStation(true);
+  badStation = new SpaceStation(false);
   theAsteroids = new ArrayList <Asteroid>();
   for (int q = 0; q < 100; q++)
   {
@@ -195,6 +201,10 @@ public void keyPressed()
   if (key == 'p')
   {
     pPressed = true;
+  }
+  if (key == 'r')
+  {
+    rPressed = !rPressed;
   }
 }
 public void keyReleased()
