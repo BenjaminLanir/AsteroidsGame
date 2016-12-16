@@ -24,7 +24,7 @@ public void duringTheGame()
   {
     theShip.accelerate(-.3);
   }
-  if (jPressed == true)
+  if (rPressed == true)
   {
     theShip.highperspace();
     theCamera.teleport();
@@ -139,7 +139,7 @@ public void duringTheGame()
   {
     if (theShip.getFuel() > 0)
     {
-      theShip.setFuel(theShip.getFuel() - 0.1);
+      theShip.setFuel(theShip.getFuel() - 0.03);
     }
   }
   if (theShip.getHealth() < 0)
@@ -166,20 +166,18 @@ public void duringTheGame()
     {
       enemyBullet.remove(xy);
       xy--;
-    }
-    if (dist(theShip.getX(), theShip.getY(), enemyBullet.get(xy).getX(), enemyBullet.get(xy).getY()) < 10)
+    } else if (dist(theShip.getX(), theShip.getY(), enemyBullet.get(xy).getX(), enemyBullet.get(xy).getY()) < 10)
     {
       enemyBullet.remove(xy);
-      theShip.setHealth(theShip.getHealth() - 0.5);
-      xy = xy - 1;
-      break;
+      theShip.setHealth(theShip.getHealth() - 0.7);
+      xy--;
     }
   }
   //moves enemy ship toward theShip
   for (int t = 0; t < theEnemies.size(); t++)
   {
     { 
-      if (theEnemies.get(t).getDistance() > 300)
+      if (theEnemies.get(t).getDistance() > 500)
       {
         theEnemies.get(t).setDirectionX(0);
         theEnemies.get(t).setDirectionY(0);  
@@ -227,7 +225,7 @@ public void duringTheGame()
     levels = 4;
   }
   nextShield ++;
-  if (nextShield % 1800 == 0)
+  if (nextShield % 3000 == 0)
   {
     if (theShip.getShield() != 3)
     {

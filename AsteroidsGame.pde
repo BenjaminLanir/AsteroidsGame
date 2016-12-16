@@ -2,8 +2,8 @@ SpaceShip theShip;
 int levels = 0;
 Star [] stars;
 Camera theCamera;
-int mapHeight = 5000;
-int mapWidth = 5000;
+int mapHeight = 30000;
+int mapWidth = 30000;
 ArrayList <Bullet> shipBullet;
 ArrayList <Bullet> enemyBullet;
 Stats playerstats;
@@ -161,7 +161,7 @@ class Star
   {
     fill(255, 255, 0);
     stroke(0, 0, 0, 0);
-    ellipse(myX, myY, 10, 10);
+    ellipse(myX, myY, 15, 15);
   }
 }
 public void keyPressed()
@@ -204,7 +204,16 @@ public void keyPressed()
   }
   if (key == 'r')
   {
-    rPressed = !rPressed;
+    if (rPressed == true)
+    {
+      rPressed = false;
+      theShip.accelerate(-180);
+    }
+    else if (rPressed == false)
+    {
+      rPressed = true;
+    }
+    System.out.println(rPressed);
   }
 }
 public void keyReleased()
