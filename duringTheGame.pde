@@ -33,7 +33,7 @@ public void duringTheGame()
   {
     if (playerstats.getOverheat() == false)
     {
-      shipBullet.add(new Bullet(theShip));
+      shipBullet.add(new Bullet(theShip, 0, 255, 255));
       theShip.setCannonHeat(theShip.getCannonHeat() + 1);
     } 
     else
@@ -185,7 +185,7 @@ public void duringTheGame()
       }
       else
       {
-        enemyBullet.add(new Bullet(theEnemies.get(t)));
+        enemyBullet.add(new Bullet(theEnemies.get(t), 0, 204, 0));
         theEnemies.get(t).accelerate(0.1);
       }
       for (int z = 0; z < theEnemies.size(); z++)
