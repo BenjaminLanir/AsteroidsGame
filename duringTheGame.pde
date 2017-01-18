@@ -1,16 +1,20 @@
 public void duringTheGame()
 {
   fill(0);
-  rect(0, 0, mapHeight, mapWidth);
+  rect(-theCamera.getVector().x, -theCamera.getVector().y, mapHeight, mapWidth);
   playerstats.show();
   playerstats.updateStats();
+  duringGame();
   theShip.changeHealth();
   fill(0);
   strokeWeight(1);
-  duringGame();
   if (wPressed == true)
   {
     theShip.accelerate(.3);
+    if (Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY()) > 10)
+    {
+      theShip.accelerate(-.3);
+    }
   }
   if (aPressed == true)
   {
@@ -98,6 +102,21 @@ public void duringTheGame()
   for (int j = 0; j < stars.length; j++)
   {
     //stars[j].show();
+  }
+  for (int i = 0; i < theEnemies.size(); i++)
+  {
+    for (int g = 0; g < shipBullet.size(); g++)
+    {
+      if (dist(theEnemies.get(i).getX(), theEnemies.get(i).getY(), shipBullet.get(g).getX(), shipBullet.get(g).getY()) < 20)
+      {
+        theEnemies.get(i).setHealth(theEnemies.get(i).getHealth() - 5);
+        if (theEnemies.get(i).getHealth() < 0)
+        {
+          theEnemies.remove(i);
+          break;
+        }
+      }
+    }
   }
   for (int u = 0; u < theAsteroids.size(); u++)
   {

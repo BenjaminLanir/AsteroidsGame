@@ -90,6 +90,7 @@ public void draw()
   }
   else if (levels == 1) //in game
   {
+    background(255, 0, 0);
     duringTheGame();
   }
   else if (levels == 2) //end game
@@ -121,7 +122,7 @@ public void draw()
     theCamera.teleport();
     translate(-theCamera.getVector().x, -theCamera.getVector().y);
     goodStation.show();
-    badStation.show();
+    badStation.show(); 
     for (int u = 0; u < theAsteroids.size(); u++)
     {
       theAsteroids.get(u).show();
