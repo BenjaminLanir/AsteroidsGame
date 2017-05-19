@@ -1,7 +1,60 @@
 public void duringTheGame()
 {
-  fill(0);
-  rect(-theCamera.getVector().x, -theCamera.getVector().y, mapHeight, mapWidth);
+  if (resetLevel)
+  {
+    theShip.setX(512);
+    theShip.setY(450);
+    theShip.setDirectionX(0);
+    theShip.setDirectionY(0);
+    theShip.setFuel(100);
+    theShip.setHealth(100);
+    theShip.setCannonHeat(100);
+    wPressed = false;
+    aPressed = false;
+    dPressed = false;
+    sPressed = false;
+    spacePressed = false;
+    jPressed = false;
+    pPressed = false;
+    mouseState = false;
+    rPressed = false;
+    resetLevel = false;
+    speed = 0;
+    nextShield = 0;
+    theShip.setShield(3);
+    while(enemyBullet.size() > 0)
+    {
+      enemyBullet.remove(0);
+    }
+    while(shipBullet.size() > 0)
+    {
+      shipBullet.remove(0);
+    }
+    while(theEnemies.size() > 0)
+    {
+      theEnemies.remove(0);
+    }
+    score = 0;
+    badStation.setHealth(20);
+    station2.setHealth(20);
+    station3.setHealth(20);
+    if (levels == 3)
+    {
+      for (int i = 0; i < 10; i++)
+      {
+        theEnemies.add(new EnemyShip((int) (Math.random() * 500 + mapWidth - 725), (int) (Math.random() * 500 + mapHeight - 725)));
+      }
+      for (int i = 0; i < 10; i++)
+      {
+        theEnemies.add(new EnemyShip((int) (Math.random() * 500 + mapWidth - 725), (int) (Math.random() * 500 + 250)));
+      }
+      for (int i = 0; i < 10; i++)
+      {
+        theEnemies.add(new EnemyShip((int) (Math.random() * 500 + 250), (int) (Math.random() * 500 + mapHeight - 725)));
+      }
+    }
+  }
+  textSize(20);
   playerstats.show();
   playerstats.updateStats();
   duringGame();
@@ -11,10 +64,10 @@ public void duringTheGame()
   if (wPressed == true)
   {
     theShip.accelerate(.3);
-    if (Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY()) > 10)
+    /*if (Math.sqrt(theShip.getDirectionX() * theShip.getDirectionX() + theShip.getDirectionY() * theShip.getDirectionY()) > 10)
     {
       theShip.accelerate(-.3);
-    }
+    }*/
   }
   if (aPressed == true)
   {
@@ -34,11 +87,15 @@ public void duringTheGame()
     theCamera.teleport();
   }
   if (spacePressed == true)
-  {
-    if (playerstats.getOverheat() == false)
+  { 
+    if (theShip.getShotTime() == 0)
     {
-      shipBullet.add(new Bullet(theShip, 0, 255, 255));
-      theShip.setCannonHeat(theShip.getCannonHeat() + 1);
+      if (playerstats.getOverheat() == false)
+      {
+        shipBullet.add(new Bullet(theShip, 0, 255, 255));
+        theShip.setCannonHeat(theShip.getCannonHeat() + 1);
+        theShip.setShotTime(3);
+      }
     } 
     else
     {
@@ -46,8 +103,6 @@ public void duringTheGame()
   }
   goodStation.show();
   goodStation.editDistance();
-  badStation.show();
-  badStation.editDistance();
   if (goodStation.getDistance() < 250)
   {
     if (theShip.getHealth() < 95)
@@ -59,15 +114,32 @@ public void duringTheGame()
       theShip.setFuel(theShip.getFuel() + 0.2);
     }
   }
-  if (badStation.getDistance() < 250)
+  if (oneStation)
   {
-    theShip.setHealth(theShip.getHealth() - 0.5);
+    badStation.show();
+    badStation.editDistance();
+    if (badStation.getDistance() < 250)
+    {
+      theShip.setHealth(theShip.getHealth() - 0.5);
+    }
+  }
+  if (moreStation)
+  {
+    station2.show();
+    station3.show();
+    station2.editDistance();
+    station3.editDistance();
+    if (station2.getDistance() < 250)
+    {
+      theShip.setHealth(theShip.getHealth() - 0.5);
+    }
+    if (station3.getDistance() < 250)
+    {
+      theShip.setHealth(theShip.getHealth() - 0.5);
+    }
   }
   theShip.show();
   theShip.move();
-  testEnemy.show();
-  testEnemy.track();
-  testEnemy.move();
   for (int j = 0; j < theEnemies.size(); j++)
   {
     theEnemies.get(j).setPreviousDirection(theEnemies.get(j).getPointDirection());
@@ -99,10 +171,6 @@ public void duringTheGame()
       shipBullet.remove(c);
     }
   }
-  for (int j = 0; j < stars.length; j++)
-  {
-    //stars[j].show();
-  }
   for (int i = 0; i < theEnemies.size(); i++)
   {
     for (int g = 0; g < shipBullet.size(); g++)
@@ -113,6 +181,8 @@ public void duringTheGame()
         if (theEnemies.get(i).getHealth() < 0)
         {
           theEnemies.remove(i);
+          score++;
+          System.out.println(score);
           break;
         }
       }
@@ -163,7 +233,7 @@ public void duringTheGame()
   }
   if (theShip.getHealth() < 0)
   {
-    levels = 2;
+    levels = 10;
   }
   for (int xy = 0; xy < enemyBullet.size(); xy++)
   {
@@ -198,13 +268,15 @@ public void duringTheGame()
     { 
       if (theEnemies.get(t).getDistance() > 500)
       {
-        theEnemies.get(t).setDirectionX(0);
-        theEnemies.get(t).setDirectionY(0);  
-        theEnemies.get(t).accelerate(10);
+        theEnemies.get(t).accelerate(0.3);
       }
       else
       {
-        enemyBullet.add(new Bullet(theEnemies.get(t), 0, 204, 0));
+        if (theEnemies.get(t).getShotTime() == 0)
+        {
+          enemyBullet.add(new Bullet(theEnemies.get(t), 0, 204, 0));
+          theEnemies.get(t).setShotTime(3);
+        }
         theEnemies.get(t).accelerate(0.1);
       }
       for (int z = 0; z < theEnemies.size(); z++)
@@ -218,30 +290,13 @@ public void duringTheGame()
           }
         }
       }
-      double dRadians =testEnemy.getPointDirection()*(Math.PI/180);
-      if (Math.abs(theEnemies.get(t).getDirectionX() * theEnemies.get(t).getDirectionX() + theEnemies.get(t).getDirectionY() * theEnemies.get(t).getDirectionY()) > 10)
-      {
-        //if (theEnemies.get(t).getPointDirection() == theEnemies.get(t).getPreviousDirection())
-        //{
-          //theEnemies.get(t).accelerate(-1);
-        //}
-      }     
-      //change coordinates of direction of travel    
-      /*double directionX = ((5) * Math.cos(dRadians));    
-       double directionY = ((5) * Math.sin(dRadians)); 
-       testEnemy.setDirectionX(0);
-       testEnemy.setDirectionY(0);
-       testEnemy.setDirectionX(directionX);
-       testEnemy.setDirectionY(directionY);*/
-      //System.out.println(testEnemy.getX() + testEnemy.getY());
-      //speed += .3;
     }
   }
   if (pPressed == true)
   {
     //pause
     pPressed = false;
-    levels = 4;
+    levels = 12;
   }
   nextShield ++;
   if (nextShield % 3000 == 0)

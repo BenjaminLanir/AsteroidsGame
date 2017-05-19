@@ -4,6 +4,7 @@ class SpaceShip extends Floater
   protected double cannonHeat;
   protected double fuel;
   protected double shield;
+  protected double shotTime;
   public void setX(int x)
   {
     myCenterX = x;
@@ -49,6 +50,11 @@ class SpaceShip extends Floater
     shield = g;
   }
   public double getShield(){return shield;}
+  public void setShotTime(int shot)
+  {
+    shotTime = shot;
+  }
+  public double getShotTime(){return shotTime;}
   public SpaceShip()
     {
       corners = 4;
@@ -69,6 +75,7 @@ class SpaceShip extends Floater
       cannonHeat = 0;
       fuel = 100;
       shield = 3;
+      shotTime = 0;
     }
     public void highperspace()
     {
@@ -79,10 +86,26 @@ class SpaceShip extends Floater
       myDirectionY = 0;*/
       myDirectionX = 0;
       myDirectionY = 0;
-      accelerate(200);
+      accelerate(100);
     }
     public void move()
     {
+      if (myDirectionX > 20)
+      {
+        myDirectionX = myDirectionX - 0.3;
+      }
+      if (myDirectionY > 20)
+      {
+        myDirectionY = myDirectionY - 0.3;
+      }
+      if (myDirectionX < -20)
+      {
+        myDirectionX = myDirectionX + 0.3;
+      }
+      if (myDirectionY < -20)
+      {
+        myDirectionY = myDirectionY + 0.3;
+      }
       myCenterX += myDirectionX;    
       myCenterY += myDirectionY; 
     }
@@ -122,5 +145,9 @@ class SpaceShip extends Floater
       }
       else
       {}
+      if (shotTime != 0)
+      {
+        shotTime--;
+      }
     }
 }

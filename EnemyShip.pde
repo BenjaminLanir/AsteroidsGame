@@ -1,7 +1,7 @@
 class EnemyShip extends SpaceShip
 {
   public double previousDirection;
-  public EnemyShip()
+  public EnemyShip(int myX, int myY)
   {
     corners = 4;
     xCorners = new int[corners];
@@ -15,12 +15,13 @@ class EnemyShip extends SpaceShip
     xCorners[3] = 16;
     yCorners[3] = 0;
     myColor = 255;
-    myCenterX = Math.random() * 500 + mapWidth - 725;
-    myCenterY = Math.random() * 500 + mapHeight - 725;
+    myCenterX = myX;
+    myCenterY = myY;
     health = 100;
     cannonHeat = 0;
     myColor = color(255, 0, 0);
     previousDirection = 0;
+    shotTime = 0;
   }
   public void setPreviousDirection(double i)
   {
@@ -45,12 +46,40 @@ class EnemyShip extends SpaceShip
   }
   public void move()
   {
-    //if (Math.abs(myDirectionX * myDirectionX + myDirectionY * myDirectionY) == 1)
-    //{
-      //myDirectionX --;
-      //myDirectionY --;
-      //accelerate(-.3);
-    //}
-    super.move();
+    if (myDirectionX > 10)
+    {
+      myDirectionX = myDirectionX - 0.3;
+    }
+    if (myDirectionY > 10)
+    {
+      myDirectionY = myDirectionY - 0.3;
+    }
+    if (myDirectionX < -10)
+    {
+      myDirectionX = myDirectionX + 0.3;
+    }
+    if (myDirectionY < -10)
+    {
+      myDirectionY = myDirectionY + 0.3;
+    }
+      myCenterX += myDirectionX;    
+      myCenterY += myDirectionY;
+    //super.move();
+    if (shotTime != 0)
+    {
+      shotTime--;
+    }
+  }
+  public void show()
+  {
+    strokeWeight(5);
+    stroke(255);
+    rect((float) myCenterX - 5, (float) myCenterY - 20, 20, 5);
+    strokeWeight(2);
+    fill(255, 0, 0);
+    stroke(255, 0, 0);
+    rect((float) myCenterX - 4.5, (float) myCenterY - 20, (float) health/100 * 18, 4);
+    strokeWeight(0);
+    super.show();
   }
 }

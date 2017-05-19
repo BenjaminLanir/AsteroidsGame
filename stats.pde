@@ -49,7 +49,6 @@ class Stats
     strokeWeight(0);
     rect(theShip.getX() / (mapWidth / 204.0) + 810.0, theShip.getY() / (mapHeight / 204.0) + 10.0, 5, 5);
     fill(255, 0, 0);
-    rect(testEnemy.getX() / (mapWidth / 204.0) + 810.0, testEnemy.getY() / (mapHeight / 204.0) + 10.0, 5, 5);
     for (int i = 0; i < theAsteroids.size(); i++)
     {
       fill(122, 50, 10);
