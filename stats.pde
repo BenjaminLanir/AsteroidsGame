@@ -60,6 +60,11 @@ class Stats
       fill(255, 0, 0);
       rect(theEnemies.get(j).getX() / (mapWidth / 204.0) + 810, theEnemies.get(j).getY() / (mapHeight / 204.0) + 10.0, 5, 5);
     }
+    if (levels == 5)
+    {
+      fill(255, 0, 0);
+      rect(firstBoss.getX() / (mapWidth / 204.0) + 810, firstBoss.getY() / (mapHeight / 204.0) + 10.0, 8, 8);
+    }
   }
   public void updateStats()
   {

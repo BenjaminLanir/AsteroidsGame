@@ -254,6 +254,14 @@ public void draw()
       instructionsCounter++;
     }
     duringTheGame();
+    if (firstBoss.getDistance() > 500)
+    {
+      firstBoss.accelerate(.3);
+    }
+    else if (firstBoss.getDistance() < 500)
+    {
+      firstBoss.accelerate(.1);
+    }
     firstBoss.show();
     firstBoss.track();
     firstBoss.move();
