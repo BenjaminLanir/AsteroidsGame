@@ -59,7 +59,6 @@ public void setItUp()
   shipBullet = new ArrayList <Bullet>();
   enemyBullet = new ArrayList <Bullet>();
   theEnemies = new ArrayList <EnemyShip>(30);
-  playerstats = new Stats();
   stars = new Star[((int) (Math.random() * ((mapHeight * mapWidth) / 30000)))];
   goodStation = new SpaceStation(true, 450, 450);
   badStation = new SpaceStation(false, mapWidth - 450, mapHeight - 450);
@@ -91,6 +90,7 @@ public void setItUp()
   pPressed = false;
   mouseState = false;
   rPressed = false;
+  playerstats = new Stats();
 }
 public void draw() 
 {
