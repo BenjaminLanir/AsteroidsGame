@@ -55,7 +55,7 @@ public void duringTheGame()
     }
   }
   textSize(20);
-  playerstats.show();
+  //playerstats.show();
   playerstats.updateStats();
   duringGame();
   theShip.changeHealth();
